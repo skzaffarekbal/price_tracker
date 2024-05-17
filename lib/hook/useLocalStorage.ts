@@ -22,10 +22,12 @@ const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T) => voi
   // Function to update the value in localStorage and state
   const setValue = (value: T) => {
     try {
-      // Save to localStorage
-      window.localStorage.setItem(key, JSON.stringify(value));
-      // Update state
-      setStoredValue(value);
+      if (typeof window !== 'undefined') {
+        // Save to localStorage
+        window.localStorage.setItem(key, JSON.stringify(value));
+        // Update state
+        setStoredValue(value);
+      }
     } catch (error) {
       console.error(`Error setting ${key} in localStorage:`, error);
     }
