@@ -69,7 +69,7 @@ export async function getProductByIds(bookmarks: string[]) {
     connectToDB();
 
     const allBookmarks = await Product.find({ _id: { $in: bookmarks } });
-    console.log('Fetched bookmarks:', allBookmarks);
+    // console.log('Fetched bookmarks:', allBookmarks);
 
     return allBookmarks || [];
   } catch (error: any) {

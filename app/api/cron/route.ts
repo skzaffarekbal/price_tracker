@@ -56,14 +56,6 @@ export async function GET() {
           averagePrice: getAveragePrice(updatedPriceHistory),
         };
 
-        if (!scrapedProduct) {
-          console.log('Failed to scrape product / Product is no more saleable.', {
-            product: product,
-          });
-          // return currentProduct;
-          // throw new Error('No Product Found');
-        }
-
         updatedProduct = await Product.findOneAndUpdate({ url: product.url }, product, {
           new: true,
         });
