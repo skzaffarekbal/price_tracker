@@ -13,7 +13,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
   if (!productUrl) return;
 
   try {
-    connectToDB();
+    await connectToDB();
     const scrapedProduct = await scrapeAmazonProduct(productUrl);
     if (!scrapedProduct) return;
 
@@ -52,7 +52,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
 
 export async function getProductById(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const product = await Product.findOne({ _id: productId });
     if (!product) return null;
@@ -66,7 +66,7 @@ export async function getProductById(productId: string) {
 export async function getProductByIds(bookmarks: string[]) {
   try {
     console.log('Fetching bookmarks for IDs:', bookmarks);
-    connectToDB();
+    await connectToDB();
 
     const allBookmarks = await Product.find({ _id: { $in: bookmarks } });
     // console.log('Fetched bookmarks:', allBookmarks);
@@ -80,7 +80,7 @@ export async function getProductByIds(bookmarks: string[]) {
 
 export async function getAllProducts() {
   try {
-    connectToDB();
+    await connectToDB();
 
     const products = await Product.find();
     return products;
@@ -91,7 +91,7 @@ export async function getAllProducts() {
 
 export async function getTrendingProducts() {
   try {
-    connectToDB();
+    await connectToDB();
 
     const products = await Product.find({ currentPrice: { $ne: 0 } }).sort({ discount: -1 }).limit(4);
     return products;
@@ -102,7 +102,7 @@ export async function getTrendingProducts() {
 
 export async function getTopProducts() {
   try {
-    connectToDB();
+    await connectToDB();
 
     const products = await Product.find().sort({ originalPrice: -1 }).limit(4);
     return products;
@@ -113,7 +113,7 @@ export async function getTopProducts() {
 
 export async function getSimilarProducts(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const currentProduct = await Product.findById(productId);
     if (!currentProduct) return null;
@@ -128,7 +128,7 @@ export async function getSimilarProducts(productId: string) {
 
 export async function addUserEmailToProduct(productId: string, userEmail: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const product = await Product.findById(productId);
     if (!product) return null;
