@@ -35,7 +35,7 @@ const Home = async () => {
       <section className='trending-section'>
         <h2 className='section-text'>Trending</h2>
 
-        <div className='flex flex-wrap gap-x-8 gap-y-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16'>
           {trendingProducts?.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
@@ -45,7 +45,7 @@ const Home = async () => {
       <section className='trending-section'>
         <h2 className='section-text'>Most Viewed</h2>
 
-        <div className='flex flex-wrap gap-x-8 gap-y-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16'>
           {topProducts?.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}

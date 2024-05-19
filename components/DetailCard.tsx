@@ -19,7 +19,7 @@ const DetailCard = ({ title, detailsList = [], featuresList = [], isCard }: Prop
             {detailsList?.map((item, i) => (
               <div key={i}>
                 <p className='text-base text-black-100'>{item.keyName}</p>
-                <p className='text-lg font-bold text-secondary'>{item.keyValue}</p>
+                <p className='text-lg font-bold text-secondary break-words'>{item.keyValue}</p>
               </div>
             ))}
           </div>
