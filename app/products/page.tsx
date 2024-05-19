@@ -2,6 +2,9 @@ import ProductCard from '@/components/ProductCard';
 import { getAllProducts } from '@/lib/actions';
 import React from 'react';
 
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
+
 const Products = async () => {
   const allProducts = await getAllProducts();
 
