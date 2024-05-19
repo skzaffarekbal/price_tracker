@@ -39,7 +39,18 @@ export async function GET() {
           product.discount = 0;
 
           await product.save();
-          return product;
+
+          return {
+            title: product.title,
+            url: product.url,
+            sellerBackOut: product.sellerBackOut,
+            originalPrice: product.originalPrice,
+            currentPrice: product.currentPrice,
+            discount: product.discount,
+            lowestPrice: product.lowestPrice,
+            highestPrice: product.highestPrice,
+            averagePrice: product.averagePrice,
+          };
         }
 
         const updatedPriceHistory: any = [
@@ -77,12 +88,23 @@ export async function GET() {
           await sendEmail(emailContent, userEmails);
         }
 
-        return updatedProduct;
+        return {
+          title: updatedProduct.title,
+          url: updatedProduct.url,
+          sellerBackOut: updatedProduct.sellerBackOut,
+          originalPrice: updatedProduct.originalPrice,
+          currentPrice: updatedProduct.currentPrice,
+          discount: updatedProduct.discount,
+          lowestPrice: updatedProduct.lowestPrice,
+          highestPrice: updatedProduct.highestPrice,
+          averagePrice: updatedProduct.averagePrice,
+        };
       })
     );
 
     return NextResponse.json({
-      message: 'Ok',
+      status: 200,
+      message: 'Cron Job Done.',
       data: updatedProducts,
     });
   } catch (error) {
