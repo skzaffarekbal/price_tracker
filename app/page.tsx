@@ -4,6 +4,9 @@ import SearchBar from '@/components/SearchBar';
 import { getAllProducts, getTopProducts, getTrendingProducts } from '@/lib/actions';
 import Image from 'next/image';
 
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
+
 const Home = async () => {
   const trendingProducts = await getTrendingProducts();
   const topProducts = await getTopProducts();
