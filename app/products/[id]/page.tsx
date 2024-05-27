@@ -116,14 +116,14 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             <div className='flex flex-col gap-2'>
               {product.currentPrice ? (
                 <p className='text-[34px] text-secondary font-bold'>
-                  {product.currency} {formatNumber(product.currentPrice)}
+                  {product.currency} {formatNumber(product?.currentPrice || 0)}
                 </p>
               ) : (
                 <p className='text-md text-primary font-bold'>{'Currently Unavailable.'}</p>
               )}
               <p>
                 <span className='text-[21px] text-black opacity-50 line-through'>
-                  {product.currency} {formatNumber(product.originalPrice)}
+                  {product.currency} {formatNumber(product?.originalPrice || 0)}
                 </span>{' '}
                 {product.discount ? (
                   <span className='text-[21px] text-primary font-semibold'>
@@ -181,24 +181,24 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                 iconSrc='/assets/icons/price-tag.svg'
                 value={
                   product.currentPrice
-                    ? `${product.currency} ${formatNumber(product.currentPrice)}`
+                    ? `${product.currency} ${formatNumber(product?.currentPrice || 0)}`
                     : `${product.currentPrice}`
                 }
               />
               <PriceInfoCard
                 title='Average Price'
                 iconSrc='/assets/icons/chart.svg'
-                value={`${product.currency} ${formatNumber(product.averagePrice)}`}
+                value={`${product.currency} ${formatNumber(product?.averagePrice || 0)}`}
               />
               <PriceInfoCard
                 title='Highest Price'
                 iconSrc='/assets/icons/arrow-up.svg'
-                value={`${product.currency} ${formatNumber(product.highestPrice)}`}
+                value={`${product.currency} ${formatNumber(product?.highestPrice || 0)}`}
               />
               <PriceInfoCard
                 title='Lowest Price'
                 iconSrc='/assets/icons/arrow-down.svg'
-                value={`${product.currency} ${formatNumber(product.lowestPrice)}`}
+                value={`${product.currency} ${formatNumber(product?.lowestPrice || 0)}`}
               />
             </div>
           </div>

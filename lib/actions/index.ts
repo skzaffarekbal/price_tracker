@@ -23,7 +23,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     if (existingProduct) {
       const updatedPriceHistory: any = [
         ...existingProduct.priceHistory,
-        { price: scrapedProduct.currentPrice },
+        { price: scrapedProduct?.currentPrice || 0 },
       ];
 
       product = {

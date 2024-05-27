@@ -27,7 +27,7 @@ export async function GET() {
           console.log('Failed to scrape product / Product is no more saleable.', {
             scrapedProduct: scrapedProduct,
           });
-          // return currentProduct;
+          return currentProduct;
           // throw new Error('No Product Found');
 
           const product = await Product.findById(currentProduct._id);
