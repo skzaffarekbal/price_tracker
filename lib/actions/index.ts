@@ -128,11 +128,7 @@ export async function getSimilarProducts(productId: string) {
   }
 }
 
-export async function addUserEmailToProduct(
-  productId: string,
-  userEmail: string,
-  trackPrice: string
-) {
+export async function addUserEmailToProduct(productId: string, userEmail: string) {
   try {
     await connectToDB();
 
@@ -141,7 +137,7 @@ export async function addUserEmailToProduct(
 
     const userExist = product.users.some((user: User) => user.email === userEmail);
     if (!userExist) {
-      product.users.push({ email: userEmail, trackPrice: trackPrice || product.lowestPrice });
+      product.users.push({ email: userEmail });
 
       await product.save();
 

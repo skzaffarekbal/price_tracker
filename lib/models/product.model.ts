@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
     reviewsCount: { type: Number },
     stars: { type: Number },
     isOutOfStock: { type: Boolean, default: false },
-    users: [{ email: { type: String, required: true }, trackPrice: { type: Number } }],
+    users: [{ email: { type: String, required: true } }],
     productFrom: { type: String, default: 'amazon' },
     offers: [
       {
