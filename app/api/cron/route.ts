@@ -27,7 +27,18 @@ export async function GET() {
           console.log('Failed to scrape product / Product is no more saleable.', {
             scrapedProduct: scrapedProduct,
           });
-          return currentProduct;
+          return {
+            title: currentProduct.title,
+            url: currentProduct.url,
+            sellerBackOut: currentProduct.sellerBackOut,
+            originalPrice: currentProduct.originalPrice,
+            currentPrice: currentProduct.currentPrice,
+            discount: currentProduct.discount,
+            lowestPrice: currentProduct.lowestPrice,
+            highestPrice: currentProduct.highestPrice,
+            averagePrice: currentProduct.averagePrice,
+          };
+          // return currentProduct;
           // throw new Error('No Product Found');
 
           const product = await Product.findById(currentProduct._id);

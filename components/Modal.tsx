@@ -4,28 +4,47 @@ import { FormEvent, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { addUserEmailToProduct } from '@/lib/actions';
+import { formatNumber } from '@/lib/utils';
 
 interface Props {
   productId: string;
+  originalPrice: number;
+  lowestPrice: number;
+  currentPrice: number;
+  currency: string;
 }
 
-const Modal = ({ productId }: Props) => {
+const Modal = ({ productId, originalPrice, lowestPrice, currentPrice, currency }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
+  const [trackPrice, setTrackPrice] = useState(`${lowestPrice}`);
+  const [isError, setIsError] = useState(false);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleTrackPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (originalPrice > parseInt(e.target.value)) {
+      setTrackPrice(e.target.value);
+      setIsError(false);
+    } else {
+      setTrackPrice(e.target.value);
+      setIsError(true);
+    }
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isError) return;
     setIsSubmitting(true);
 
     await addUserEmailToProduct(productId, email);
 
     setIsSubmitting(false);
     setEmail('');
+    setTrackPrice('');
     toggleModal();
   };
 
@@ -103,6 +122,30 @@ const Modal = ({ productId }: Props) => {
                       placeholder='Enter your email address'
                       className='dialog-input'
                     />
+                  </div>
+
+                  <label htmlFor='trackPrice' className='text-sm font-medium text-gray-700 mt-4'>
+                    Minimum Track Price
+                  </label>
+                  <div
+                    className={`dialog-input_container ${
+                      isError ? 'border-red-300' : 'border-gray-300'
+                    }`}
+                  >
+                    <Image src='/assets/icons/price-tag.svg' alt='mail' width={18} height={18} />
+
+                    <div className='flex items-center flex-1'>
+                      <div className='text-gray-500 text-base'>{currency}</div>
+                      <input
+                        required
+                        type='number'
+                        id='trackPrice'
+                        value={trackPrice}
+                        onChange={handleTrackPrice}
+                        placeholder='Enter Minimum Track Price'
+                        className='flex-1 pl-1 border-none text-gray-500 text-base focus:outline-none border border-gray-300 rounded-[27px] shadow-xs'
+                      />
+                    </div>
                   </div>
 
                   <button type='submit' className='dialog-btn'>

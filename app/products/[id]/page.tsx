@@ -203,7 +203,13 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             </div>
           </div>
 
-          <Modal productId={id} />
+          <Modal
+            productId={id}
+            originalPrice={(product?.originalPrice)}
+            lowestPrice={product?.lowestPrice}
+            currentPrice={product?.currentPrice}
+            currency={product.currency}
+          />
         </div>
       </div>
 

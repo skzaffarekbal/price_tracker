@@ -93,7 +93,9 @@ export async function getTrendingProducts() {
   try {
     await connectToDB();
 
-    const products = await Product.find({ currentPrice: { $ne: 0 } }).sort({ discount: -1 }).limit(4);
+    const products = await Product.find({ currentPrice: { $ne: 0 } })
+      .sort({ discount: -1 })
+      .limit(4);
     return products;
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`);
@@ -126,7 +128,11 @@ export async function getSimilarProducts(productId: string) {
   }
 }
 
-export async function addUserEmailToProduct(productId: string, userEmail: string) {
+export async function addUserEmailToProduct(
+  productId: string,
+  userEmail: string,
+  trackPrice: string
+) {
   try {
     await connectToDB();
 
@@ -135,7 +141,7 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
 
     const userExist = product.users.some((user: User) => user.email === userEmail);
     if (!userExist) {
-      product.users.push({ email: userEmail });
+      product.users.push({ email: userEmail, trackPrice: trackPrice || product.lowestPrice });
 
       await product.save();
 
