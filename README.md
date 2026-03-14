@@ -217,7 +217,7 @@ This helps users buy products at the **best possible price**.
 -   Multi-store price tracking (Flipkart, Walmart, etc.)
 -   AI price prediction
 -   Browser extension
--   User dashboard for tracked products
+-   User Login and dashboard for tracked products
 -   Mobile optimization
 
 ------------------------------------------------------------------------
