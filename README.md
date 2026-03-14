@@ -31,7 +31,7 @@ Users can subscribe via email and get notified when a product price
 drops.
 
 🛒 **Affiliate Integration**\
-Each product page includes an Amazon affiliate link for purchasing.
+Each product page includes an Amazon affiliate link for purchasing tracked products while generating referral traffic.
 
 🤖 **Automated Daily Price Updates**\
 A cron job runs every day to fetch the latest product price.
@@ -76,7 +76,7 @@ components
 
 **MongoDB Atlas** - Cloud database for storing product and price history
 
-**Mongoose** - MongoDB object modeling for Node.js
+**Mongoose(ODM)** - MongoDB object modeling for Node.js
 
 **Axios** - HTTP client for fetching product pages
 
